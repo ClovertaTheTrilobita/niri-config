@@ -66,7 +66,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-     focus-follows-mouse max-scroll-amount="100%"
+    // focus-follows-mouse max-scroll-amount="100%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -104,6 +104,12 @@ output "eDP-1" {
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
     position x=1280 y=0
+}
+
+
+cursor {
+    xcursor-theme "miku-cursor-linux"
+    xcursor-size 38
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -260,6 +266,8 @@ layout {
         // top 64
         // bottom 64
     }
+
+    // background-color "transparent"
 }
 
 // Add lines like this to spawn processes at startup.
@@ -270,6 +278,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 spawn-at-startup "swww-daemon"
+spawn-sh-at-startup "swaybg -i /home/cloverta/Pictures/Aya-blur.png -m fill"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -283,7 +292,7 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-prefer-no-csd
+// prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -345,6 +354,17 @@ window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
+
+// Make the wallpaper stationary, rather than moving with workspaces.
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+// Set transparent workspace background color.
+
 
 //window-rule {
 //    match is-active=false
