@@ -278,7 +278,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 spawn-at-startup "swww-daemon"
-spawn-sh-at-startup "swaybg -i /home/cloverta/Pictures/Aya-blur.png -m fill"
+spawn-sh-at-startup "swaybg -i /home/cloverta/Pictures/sunset-blur.jpg -m fill"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -292,7 +292,7 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -346,6 +346,30 @@ window-rule {
 
     // Use this instead if you want them visible on third-party screenshot tools.
     // block-out-from "screencast"
+}
+
+window-rule {
+    // 只匹配 QQ 主窗口（App ID 匹配用的是正则）
+    match app-id=r#"^QQ$"#
+
+    // 你要的“形状”：1180 × 906（逻辑像素）
+    default-column-width { fixed 1180; }
+    default-window-height { fixed 906; }
+
+    // 明确要求以平铺方式打开（可省略，但写上更直观）
+    open-floating false
+}
+
+window-rule {
+    // 只匹配 QQ 主窗口（App ID 匹配用的是正则）
+    match app-id=r#"^Weixin$"#
+
+    // 你要的“形状”：1180 × 906（逻辑像素）
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 906; }
+
+    // 明确要求以平铺方式打开（可省略，但写上更直观）
+    open-floating false
 }
 
 // Example: enable rounded corners for all windows.
