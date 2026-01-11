@@ -10,7 +10,12 @@ spawn-sh-at-startup "wl-paste --watch cliphist store"
 spawn-sh-at-startup "wl-paste --primary --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type text  --watch cliphist store"
+
+// If you wish to use the switch_wallpaper.sh provided by me, DO NOT EDIT the following line.
+// I'm sorry for the inconvenience.
 spawn-sh-at-startup "swaybg -i /home/cloverta/.config/niri/wallpapers/sunset-blur.jpg -m fill"
+
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
