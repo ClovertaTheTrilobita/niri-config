@@ -1,0 +1,4 @@
+cursor {
+    xcursor-theme "miku-cursor-linux"
+    xcursor-size 30
+}

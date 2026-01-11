@@ -1,0 +1,121 @@
+// Uncomment this line to ask the clients to omit their client-side decorations if possible.
+// If the client will specifically ask for CSD, the request will be honored.
+// Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
+// This option will also fix border/focus ring drawing behind some semitransparent windows.
+// After enabling or disabling this, you need to restart the apps for this to take effect.
+//prefer-no-csd
+
+
+// Animation settings.
+// The wiki explains how to configure individual animations:
+// https://yalter.github.io/niri/Configuration:-Animations
+animations {
+    // Uncomment to turn off all animations.
+    // off
+
+    // Slow down all animations by this factor. Values below 1 speed them up instead.
+    // slowdown 3.0
+}
+
+// Window rules let you adjust behavior for individual windows.
+// Find more information on the wiki:
+// https://yalter.github.io/niri/Configuration:-Window-Rules
+
+// Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+    // This regular expression is intentionally made as specific as possible,
+    // since this is the default config, and we want no false positives.
+    // You can get away with just app-id="wezterm" if you want.
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// Example: block out two password managers from screen capture.
+// (This example rule is commented out with a "/-" in front.)
+/-window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
+window-rule {
+    // 只匹配 QQ 主窗口（App ID 匹配用的是正则）
+    match app-id=r#"^QQ$"#
+
+    // 你要的“形状”：1180 × 906（逻辑像素）
+    default-column-width { fixed 1180; }
+    default-window-height { fixed 906; }
+
+    // 明确要求以平铺方式打开（可省略，但写上更直观）
+    open-floating false
+}
+
+window-rule {
+  match app-id=r#"^QQ$"# title=r#"^群聊的聊天记录$"#
+
+  default-column-width { fixed 480; }
+  default-window-height { fixed 676; }
+
+  //default-floating-position x=616 y=151.33 relative-to="top-left"
+
+  open-floating true
+}
+
+window-rule {
+    // 只匹配 QQ 主窗口（App ID 匹配用的是正则）
+    match app-id=r#"^Weixin$"#
+
+    // 你要的“形状”：1180 × 906（逻辑像素）
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 906; }
+
+    // 明确要求以平铺方式打开（可省略，但写上更直观）
+    open-floating false
+}
+
+// Example: enable rounded corners for all windows.
+// (This example rule is commented out with a "/-" in front.)
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+// Make the wallpaper stationary, rather than moving with workspaces.
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+
+layer-rule {
+    match namespace="^swaync-control-center$"
+
+    opacity 0.95
+    geometry-corner-radius 14
+
+    shadow {
+        on
+        softness 40
+        spread 6
+        offset x=0 y=6
+        draw-behind-window true
+        color "#00000066"
+    }
+}
+
