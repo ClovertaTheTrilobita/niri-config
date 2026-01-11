@@ -109,7 +109,7 @@ output "eDP-1" {
 
 cursor {
     xcursor-theme "miku-cursor-linux"
-    xcursor-size 38
+    xcursor-size 30
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -278,6 +278,10 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 spawn-at-startup "swww-daemon"
+spawn-sh-at-startup "wl-paste --watch cliphist store"
+spawn-sh-at-startup "wl-paste --primary --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type text  --watch cliphist store"
 spawn-sh-at-startup "swaybg -i /home/cloverta/Pictures/sunset-blur.jpg -m fill"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -292,7 +296,7 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-prefer-no-csd
+//prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -385,6 +389,23 @@ layer-rule {
     // Find the right namespace by running niri msg layers.
     match namespace="^wallpaper$"
     place-within-backdrop true
+}
+
+
+layer-rule {
+    match namespace="^swaync-control-center$"
+
+    opacity 0.95
+    geometry-corner-radius 14
+
+    shadow {
+        on
+        softness 40
+        spread 6
+        offset x=0 y=6
+        draw-behind-window true
+        color "#00000066"
+    }
 }
 
 // Set transparent workspace background color.
