@@ -76,6 +76,28 @@ window-rule {
 }
 
 window-rule {
+  match app-id=r#"^QQ$"# title=r#"^QQ用户的聊天记录$"#
+
+  default-column-width { fixed 480; }
+  default-window-height { fixed 676; }
+
+  //default-floating-position x=616 y=151.33 relative-to="top-left"
+
+  open-floating true
+}
+
+window-rule {
+  match app-id=r#"^QQ$"# title=r#"^图片查看器$"#
+
+  default-column-width { fixed 480; }
+  default-window-height { fixed 676; }
+
+  //default-floating-position x=616 y=151.33 relative-to="top-left"
+
+  open-floating true
+}
+
+window-rule {
     // 只匹配 QQ 主窗口（App ID 匹配用的是正则）
     match app-id=r#"^Weixin$"#
 
