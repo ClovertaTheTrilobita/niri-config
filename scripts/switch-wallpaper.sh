@@ -58,7 +58,7 @@ sed -i.bak -E \
   "$config"
 
 needle='spawn-sh-at-startup "swww img ~/.config/niri/wallpapers/sunset.jpg"'
-sed -i "\|^${needle//\\/\\\\}\$|d" "$file"
+sed -i "\|^${needle//\\/\\\\}\$|d" "$config"
 
 echo "Wallpaper upated🥳"
 
