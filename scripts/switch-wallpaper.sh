@@ -57,6 +57,9 @@ sed -i.bak -E \
   "s|^([[:space:]]*spawn-sh-at-startup[[:space:]]+\"swaybg[[:space:]]+-i[[:space:]]+)[^\"]+([[:space:]]+-m[[:space:]]+fill\"[[:space:]]*)$|\1${escaped_img_path}\2|g" \
   "$config"
 
+needle='spawn-sh-at-startup "swww img ~/.config/niri/wallpapers/sunset.jpg"'
+sed -i "\|^${needle//\\/\\\\}\$|d" "$file"
+
 echo "Wallpaper upated🥳"
 
 swww img "$wallp"
