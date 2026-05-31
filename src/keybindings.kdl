@@ -15,7 +15,8 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: Kitty" { spawn "kitty"; }
-    Mod+A hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+A hotkey-overlay-title="Run an Application: Noctalia Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+B hotkey-overlay-title="Open Clipboard" { spawn-sh "qs -c noctalia-shell ipc call plugin:clipper toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "(sleep 0.5s; swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 10x10) & disown"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.

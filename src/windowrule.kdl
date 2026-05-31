@@ -3,7 +3,7 @@
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-//prefer-no-csd
+prefer-no-csd
 
 
 // Animation settings.
@@ -65,7 +65,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id=r#"^QQ$"# title=r#"^群聊的聊天记录$"#
+  match app-id=r#"^QQ$"# title=r#"^.+的聊天记录$"#
 
   default-column-width { fixed 480; }
   default-window-height { fixed 676; }
@@ -75,16 +75,6 @@ window-rule {
   open-floating true
 }
 
-window-rule {
-  match app-id=r#"^QQ$"# title=r#"^QQ用户的聊天记录$"#
-
-  default-column-width { fixed 480; }
-  default-window-height { fixed 676; }
-
-  //default-floating-position x=616 y=151.33 relative-to="top-left"
-
-  open-floating true
-}
 
 window-rule {
   match app-id=r#"^QQ$"# title=r#"^图片查看器$"#
@@ -112,16 +102,27 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 15
     clip-to-geometry true
 }
 
+window-rule {
+    draw-border-with-background false
+}
+
 // Make the wallpaper stationary, rather than moving with workspaces.
-layer-rule {
+//layer-rule {
     // This is for swaybg; change for other wallpaper tools.
     // Find the right namespace by running niri msg layers.
-    match namespace="^wallpaper$"
-    place-within-backdrop true
+//    match namespace="^wallpaper$"
+//    place-within-backdrop true
+//}
+//
+
+// Set the overview wallpaper on the backdrop.
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
 }
 
 
@@ -141,3 +142,7 @@ layer-rule {
     }
 }
 
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
